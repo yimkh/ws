@@ -7,12 +7,11 @@ import (
 	"log"
 	"net/http"
 	"net/http/httptest"
-	"strings"
 
-	"golang.org/x/net/http/httpguts"
+	types "github.com/yimkh/ws/types"
 )
 
-//CDO is
+//SendReq is to send request
 func SendReq(backendServer *httptest.Server) {
 	req, _ := http.NewRequest("GET", backendServer.URL, nil)
 	req.Header.Set("Connection", "Upgrade")
@@ -28,7 +27,7 @@ func SendReq(backendServer *httptest.Server) {
 	if res.StatusCode != 101 {
 		log.Fatalf("status = %v; want 101", res.Status)
 	}
-	if upgradeType(res.Header) != "websocket" {
+	if types.UpgradeType(res.Header) != "websocket" {
 		log.Fatalf("not websocket upgrade; got %#v", res.Header)
 	}
 	rwc, ok := res.Body.(io.ReadWriteCloser)
@@ -49,11 +48,4 @@ func SendReq(backendServer *httptest.Server) {
 	if got != want {
 		log.Println(fmt.Errorf("got %#q, want %#q", got, want))
 	}
-}
-
-func upgradeType(h http.Header) string {
-	if !httpguts.HeaderValuesContainsToken(h["Connection"], "Upgrade") {
-		return ""
-	}
-	return strings.ToLower(h.Get("Upgrade"))
 }

@@ -4,7 +4,7 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/yimkh/fake/net/http/httpguts"
+	"golang.org/x/net/http/httpguts"
 )
 
 // UpgradeType is upgrade type

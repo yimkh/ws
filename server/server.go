@@ -7,14 +7,14 @@ import (
 	"log"
 	"net/http"
 	"net/http/httptest"
-	
+
 	"github.com/yimkh/ws/client"
-	"github.com/yimkh/ws/type"
+	types "github.com/yimkh/ws/types"
 )
 
 func main() {
 	backendServer := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		if type.UpgradeType(r.Header) != "websocket" {
+		if types.UpgradeType(r.Header) != "websocket" {
 			log.Println("unexpected backend request")
 			http.Error(w, "unexpected request", 400)
 			return
