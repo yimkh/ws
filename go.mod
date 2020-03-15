@@ -2,4 +2,7 @@ module github.com/yimkh/ws
 
 go 1.13
 
-require golang.org/x/net v0.0.0-20200301022130-244492dfa37a
+require (
+	github.com/gin-gonic/gin v1.5.0
+	github.com/gorilla/websocket v1.4.1
+)
