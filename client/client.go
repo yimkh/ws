@@ -17,14 +17,7 @@ func main() {
 	}
 	defer c.Close()
 
-	log.Println("connect succeed")
-
 	for {
-		_, message, err := c.ReadMessage()
-		if err != nil {
-			log.Println("read:", err)
-			return
-		}
-		log.Printf("recv: %s", message)
+
 	}
 }
