@@ -1,4 +1,4 @@
-package model
+package wshandle
 
 import (
 	"log"

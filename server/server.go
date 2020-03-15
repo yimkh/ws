@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/yimkh/ws/server/model"
+	model "github.com/yimkh/ws/server/model"
 )
 
 func main() {
@@ -11,5 +11,6 @@ func main() {
 	r.GET("/ws", func(c *gin.Context) {
 		model.WsHandler(c.Writer, c.Request)
 	})
+
 	r.Run(":8001")
 }
