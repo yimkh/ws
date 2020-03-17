@@ -1,16 +1,35 @@
-package main
+package server
 
 import (
-	"github.com/gin-gonic/gin"
-	model "github.com/yimkh/ws/server/model"
+	"log"
+	"net/http"
+	"time"
+
+	"github.com/gorilla/websocket"
+	probabtest "github.com/yimkh/ws/server/page/probabtest"
 )
 
-func main() {
-	r := gin.Default()
+//Upgrader is websocket upgrader
+var upgrader = websocket.Upgrader{
+	ReadBufferSize:   1024,
+	WriteBufferSize:  1024,
+	HandshakeTimeout: 5 * time.Second,
+	// 取消ws跨域校验
+	CheckOrigin: func(r *http.Request) bool {
+		return true
+	},
+}
 
-	r.GET("/ws", func(c *gin.Context) {
-		model.WsHandler(c.Writer, c.Request)
-	})
+//WsHandler is to do
+func WsHandler(w http.ResponseWriter, r *http.Request) {
+	_, err := upgrader.Upgrade(w, r, nil)
+	if err != nil {
+		log.Println(err)
+		return
+	}
 
-	r.Run(":8001")
+	for {
+		probabtest.Ptest(w)
+		return
+	}
 }

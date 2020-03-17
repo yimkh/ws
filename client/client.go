@@ -18,6 +18,6 @@ func main() {
 	defer c.Close()
 
 	for {
-
+		//do something
 	}
 }
