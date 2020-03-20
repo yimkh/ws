@@ -9,7 +9,7 @@ func main() {
 	r := gin.Default()
 
 	r.GET("/ws", func(c *gin.Context) {
-		server.WsHandler(c.Writer, c.Request)
+		server.WssHandler(c.Writer, c.Request)
 	})
 
 	r.Run(":8001")

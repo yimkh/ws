@@ -20,8 +20,8 @@ var upgrader = websocket.Upgrader{
 	},
 }
 
-//WsHandler is to do
-func WsHandler(w http.ResponseWriter, r *http.Request) {
+//WssHandler is to do
+func WssHandler(w http.ResponseWriter, r *http.Request) {
 	_, err := upgrader.Upgrade(w, r, nil)
 	if err != nil {
 		log.Println(err)
